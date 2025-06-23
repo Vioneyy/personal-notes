@@ -1,57 +1,71 @@
 body {
-  background-color: #fff;
+  background-color: #f9fbfc;
   color: #222;
   font-family: "Sarabun", "Segoe UI", sans-serif;
   min-height: 100vh;
+  margin: 0;
 }
 
 .card {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: none;
+  padding: 2rem;
 }
 
 .header-bar {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #222;
 }
 
 h2 {
+  font-weight: 700;
   margin: 0;
-  font-weight: 600;
-  color: #222;
 }
 
 .form-control {
-  background-color: #ffffff;
+  background-color: #fff;
+  border: 1.5px solid #c9d9f1;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
   color: #222;
-  border: 1.5px solid #ced4da;
-  border-radius: 0.4rem;
-  transition: border-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(72, 123, 196, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
-  opacity: 1;
+  color: #aab8cc;
 }
 
 .form-control:focus {
-  border-color: #86b7fe;
+  border-color: #4a90e2;
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
   outline: none;
-  box-shadow: 0 0 6px #86b7fe;
-  background-color: #ffffff;
-  color: #222;
+}
+
+#add-note {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+#add-note:hover {
+  background-color: #357abd;
+  border-color: #357abd;
 }
 
 .note-card {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(72, 123, 196, 0.1);
+  padding: 1rem 1.25rem;
   margin-bottom: 1rem;
   position: relative;
   color: #222;
@@ -59,8 +73,9 @@ h2 {
 
 .note-meta {
   font-size: 0.9rem;
-  color: #888;
+  color: #7a8bbf;
   margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .note-text {
@@ -71,33 +86,21 @@ h2 {
 
 .note-delete-btn {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.6rem;
+  right: 0.6rem;
   border: none;
   background: transparent;
-  color: #dc3545;
+  color: #e04e4e;
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .note-delete-btn:hover {
-  color: #a71d2a;
-}
-
-#add-note {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  color: #fff;
-  font-weight: 600;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-#add-note:hover {
-  background-color: #0b5ed7;
-  border-color: #0b5ed7;
+  color: #a72a2a;
 }
 
 #search-date {
-  max-width: 250px;
+  max-width: 260px;
+  margin-bottom: 1.5rem;
 }
