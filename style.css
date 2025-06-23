@@ -1,106 +1,80 @@
-body {
-  background-color: #f9fbfc;
-  color: #222;
-  font-family: "Sarabun", "Segoe UI", sans-serif;
-  min-height: 100vh;
-  margin: 0;
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function saveNotes() {
+  localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-.card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: none;
-  padding: 2rem;
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;")
+             .replace(/</g, "&lt;")
+             .replace(/>/g, "&gt;")
+             .replace(/\"/g, "&quot;")
+             .replace(/'/g, "&#039;");
 }
 
-.header-bar {
-  margin-bottom: 1.5rem;
-  color: #222;
+function renderNotes(filterDate = null) {
+  const notesList = document.getElementById("notes-list");
+  notesList.innerHTML = "";
+
+  const filtered = filterDate ? notes.filter(n => n.date === filterDate) : notes;
+
+  if (filtered.length === 0) {
+    notesList.innerHTML = `<p class="text-center text-muted">ไม่พบโน้ต</p>`;
+    return;
+  }
+
+  filtered.forEach((note, index) => {
+    const div = document.createElement("div");
+    div.className = "note-card";
+    div.innerHTML = `
+      <div class="note-meta">
+        🧍‍♂️ <strong>${escapeHtml(note.author)}</strong>
+        &nbsp;&nbsp;|&nbsp;&nbsp; 📅 ${note.timestamp}
+      </div>
+      <div class="note-text">${escapeHtml(note.text)}</div>
+      <button class="note-delete-btn" title="ลบโน้ต" onclick="deleteNote(${index})">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    `;
+    notesList.appendChild(div);
+  });
 }
 
-h2 {
-  font-weight: 700;
-  margin: 0;
+function addNote() {
+  const input = document.getElementById("note-input");
+  const authorInput = document.getElementById("author-input");
+  const text = input.value.trim();
+  const author = authorInput.value.trim();
+
+  if (!text || !author) {
+    alert("กรุณากรอกชื่อและเนื้อหาโน้ตก่อนบันทึก");
+    return;
+  }
+
+  const now = new Date();
+  const timestamp = now.toLocaleString("th-TH", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+  const date = now.toISOString().split("T")[0];
+
+  notes.push({ author, text, timestamp, date });
+  saveNotes();
+  renderNotes();
+  input.value = "";
 }
 
-.form-control {
-  background-color: #fff;
-  border: 1.5px solid #c9d9f1;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: #222;
-  box-shadow: 0 2px 4px rgba(72, 123, 196, 0.15);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+function deleteNote(index) {
+  if (confirm("ต้องการลบโน้ตนี้หรือไม่?")) {
+    notes.splice(index, 1);
+    saveNotes();
+    renderNotes();
+  }
 }
 
-.form-control::placeholder {
-  color: #aab8cc;
-}
+document.getElementById("add-note").addEventListener("click", addNote);
+document.getElementById("search-date").addEventListener("input", (e) => {
+  renderNotes(e.target.value);
+});
 
-.form-control:focus {
-  border-color: #4a90e2;
-  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
-  outline: none;
-}
-
-#add-note {
-  background-color: #4a90e2;
-  border-color: #4a90e2;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
-}
-
-#add-note:hover {
-  background-color: #357abd;
-  border-color: #357abd;
-}
-
-.note-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(72, 123, 196, 0.1);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-  position: relative;
-  color: #222;
-}
-
-.note-meta {
-  font-size: 0.9rem;
-  color: #7a8bbf;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.note-text {
-  white-space: pre-wrap;
-  font-size: 1rem;
-  color: #222;
-}
-
-.note-delete-btn {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  border: none;
-  background: transparent;
-  color: #e04e4e;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.note-delete-btn:hover {
-  color: #a72a2a;
-}
-
-#search-date {
-  max-width: 260px;
-  margin-bottom: 1.5rem;
-}
+renderNotes();
