@@ -11,27 +11,27 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
-  <!-- Link to external CSS -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container py-5">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card p-4 shadow">
-          <div class="header-bar mb-3">
+        <div class="card shadow">
+          <div class="header-bar">
             <h2>📝 โน้ตของฉัน</h2>
           </div>
 
-          <input type="text" id="author-input" class="form-control mb-2" placeholder="ชื่อของคุณ...">
-          <textarea id="note-input" class="form-control mb-2" rows="3" placeholder="เขียนโน้ตของคุณที่นี่..."></textarea>
-          <div class="d-grid mb-3">
-            <button id="add-note" class="btn btn-primary">
+          <input type="text" id="author-input" class="form-control mb-3" placeholder="ชื่อของคุณ...">
+          <textarea id="note-input" class="form-control mb-3" rows="3" placeholder="เขียนโน้ตของคุณที่นี่..."></textarea>
+          <div class="d-grid mb-4">
+            <button id="add-note" class="btn">
               <i class="fa-solid fa-plus"></i> เพิ่มโน้ต
             </button>
           </div>
 
-          <input type="date" id="search-date" class="form-control mb-3" placeholder="ค้นหาตามวันที่">
+          <input type="date" id="search-date" class="form-control mb-4" placeholder="ค้นหาตามวันที่">
 
           <div id="notes-list"></div>
         </div>
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <!-- Link to external JS -->
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>
